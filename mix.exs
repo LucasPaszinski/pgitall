@@ -5,6 +5,7 @@ defmodule GitAll.MixProject do
     [
       app: :gitall,
       version: "0.1.0",
+      escript: escript_config(),
       elixir: "~> 1.10",
       start_permanent: Mix.env() == :prod,
       deps: deps()
@@ -15,7 +16,13 @@ defmodule GitAll.MixProject do
   def application do
     [
       extra_applications: [:logger],
-      mod: {GitAll.Application, []}
+      mod: {GitAll, []}
+    ]
+  end
+
+  defp escript_config do
+    [
+      main_module: GitAll
     ]
   end
 
