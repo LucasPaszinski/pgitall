@@ -7,7 +7,7 @@ defmodule GitAll do
       me = self()
       spawn(fn ->
         exec_on = Path.join(path, dir)
-        result = System.cmd("git", ["status"], cd: exec_on )
+        result = :os.cmd(to_charlist("cd #{exec_on} && #{command}"))
         send me, {:git, dir, result}
       end)
     end
