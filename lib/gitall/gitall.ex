@@ -14,9 +14,9 @@ defmodule GitAll do
     #receive then back
     for _dir <- sub_dirs do
       receive do
-        {:git, header,{text, 0}} ->
-          IO.puts header
-          IO.puts text
+        {:git, header,text} ->
+          IO.puts "\n #{String.capitalize(header)} \n"
+          IO.puts inspect text
       end
     end
   end
