@@ -2,7 +2,7 @@ defmodule GitAll do
   def main(args) do
     IO.puts("passing in main")
     {time, _result} = :timer.tc(GitAll, :start, [args])
-    IO.puts "Finished in #{time/1_000_000}seconds!!"
+    IO.puts "Finished in #{time/1_000_000}seconds 🎉🎉🎉"
   end
 
   def start(args) when length(args) == 0 do
@@ -62,56 +62,7 @@ defmodule GitAll do
 
   def start(path, command) do
     IO.puts("passing in start 2 params")
-    sub_dirs = get_git_sub_dirs(path)
-    me = self()
-    spawn_console_worker(sub_dirs, path, command, me)
-    console_joiner(length(sub_dirs))
-  end
-
-  defp get_git_sub_dirs(path) do
-    File.ls!(path)
-    |> Enum.filter(&File.dir?(Path.join(path, &1)))
-    |> Enum.filter(fn sub_dir ->
-      File.ls!(Path.join(path, sub_dir))
-      |> Enum.any?(&(&1 == ".git"))
-    end)
-  end
-
-  defp console_joiner(msgs_remaining) when msgs_remaining > 0 do
-    receive do
-      {:git, header, text} ->
-        IO.puts(msg_formatter(header, text))
-    end
-
-    console_joiner(msgs_remaining - 1)
-  end
-
-  defp console_joiner(0) do
-    0
-  end
-
-  defp msg_formatter(header, text) do
-    # Do not fix the spacings and lines they are correct
-    String.replace(
-      " -----------------------------------------------------------------------------------
-\t#{String.upcase(header)}:
------------------------------------------------------------------------------------
-
-#{to_string(text)}",
-      ~r/\n/,
-      "\n\r "
-    )
-  end
-
-  defp spawn_console_worker(sub_dirs, root_dir, command, msg_joiner) do
-    for dir <- sub_dirs do
-      spawn(fn -> console_worker(dir, root_dir, command, msg_joiner) end)
-    end
-  end
-
-  defp console_worker(dir, root_dir, command, msg_joiner) do
-    exec_on = Path.join(root_dir, dir)
-    result = :os.cmd(to_charlist("cd #{exec_on} && #{command}"))
-    send(msg_joiner, {:git, dir, result})
+    sub_dirs = GitAll.GitFinder.find_git_in_subdirs(path)
+    GitAll.ConsoleSupervisor.start_workers_wait_response(sub_dirs, path, command)
   end
 end
