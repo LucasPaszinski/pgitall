@@ -4,9 +4,9 @@ defmodule GitAll.MixProject do
   def project do
     [
       app: :gitall,
-      version: "0.1.0",
+      version: "0.1.1",
       escript: escript_config(),
-      elixir: "~> 1.10",
+      elixir: "~> 1.9",
       start_permanent: Mix.env() == :prod,
       deps: deps()
     ]

@@ -1,0 +1,24 @@
+#!/bin/bash
+#
+# Execute command line to all git repositories #Works with parallel gitall version 0.1.0
+gitall="C:\Dev\Scripts\Elixir\gitall\gitall" 
+
+if [ "$#" -eq 0 ]; then
+  escript.exe $gitall "$(realpath .)" "git status"
+fi
+
+if [ "$#" -eq 1 ]; then
+  if [ -d "$1" ]; then
+    escript.exe "$gitall" "$(realpath $1)" "git status"
+  else
+    escript.exe "$gitall" "$(realpath .)" "$1"
+  fi
+fi
+
+if [ "$#" -eq 2 ]; then
+  if [ -d "$1" ]; then
+    escript.exe "$gitall" "$(realpath $1)" "$2"
+  else
+    escript.exe "$gitall" "$(realpath $2)" "$1"
+  fi
+fi

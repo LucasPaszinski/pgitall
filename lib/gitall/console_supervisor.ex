@@ -8,6 +8,7 @@ defmodule GitAll.ConsoleSupervisor do
   defp spawn_workers(sub_dirs, root_dir, command, msg_joiner) do
     for dir <- sub_dirs do
       spawn(GitAll.ConsoleWorker, :console_worker, [dir, root_dir, command, msg_joiner])
+      :timer.sleep(80)
     end
   end
 
