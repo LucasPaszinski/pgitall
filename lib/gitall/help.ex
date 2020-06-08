@@ -1,13 +1,7 @@
 defmodule GitAll.Help do
   def is_help(arg) do
     help_flags = ["--help", "-help", "--h", "-h"]
-
-    Enum.any?(
-      help_flags,
-      fn help_flag ->
-        help_flag == to_string(arg)
-      end
-    )
+    Enum.member?(help_flags, arg)
   end
 
   def show do

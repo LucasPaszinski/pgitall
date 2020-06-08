@@ -1,9 +1,15 @@
 defmodule GitAll do
+  @doc """
+  Escript main function, this is what is call when executing via escript
+  """
   def main(args) do
     {time, _result} = :timer.tc(GitAll, :start, [args])
     IO.puts("Finished in #{time / 1_000_000} seconds !!!")
   end
 
+  @doc """
+  start function
+  """
   def start([head | tail]) do
     case GitAll.Help.is_help(head) or GitAll.Help.is_help(tail) do
       true ->
