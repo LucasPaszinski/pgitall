@@ -22,4 +22,6 @@ be found at [https://hexdocs.pm/gitall](https://hexdocs.pm/gitall).
 ## Build 
 
 Execute command line:
+```bash
 $ mix escript.build
+```
