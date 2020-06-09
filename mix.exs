@@ -7,7 +7,7 @@ defmodule ParallelGitAll.MixProject do
       version: "0.1.1",
       escript: escript_config(),
       elixir: "~> 1.9",
-      start_permanent: Mix.env() == :prod,
+      start_permanent: Mix.env() == :dev,
       deps: deps()
     ]
   end

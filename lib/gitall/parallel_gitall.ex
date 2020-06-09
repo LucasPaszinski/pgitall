@@ -20,12 +20,12 @@ defmodule ParallelGitAll do
     end
   end
 
+  def start(_) do
+    ParallelGitAll.Help.show()
+  end
+
   def start(path, command) do
     sub_dirs = ParallelGitAll.GitFinder.find_git_in_subdirs(path)
     ParallelGitAll.ConsoleSupervisor.start_workers_wait_response(sub_dirs, path, command)
-  end
-
-  def start(_, _) do
-    ParallelGitAll.Help.show()
   end
 end
