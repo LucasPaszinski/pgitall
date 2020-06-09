@@ -1,4 +1,4 @@
-defmodule GitAll.GitFinder do
+defmodule ParallelGitAll.GitFinder do
   def find_git_in_subdirs(path) do
     File.ls!(path)
     |> Enum.filter(&File.dir?(Path.join(path, &1)))

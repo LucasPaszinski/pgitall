@@ -1,4 +1,4 @@
-defmodule GitAll.ConsoleSupervisor do
+defmodule ParallelGitAll.ConsoleSupervisor do
   def start_workers_wait_response(sub_dirs, root_dir, command) do
     msg_joiner = self()
     spawn_workers(sub_dirs, root_dir, command, msg_joiner)
@@ -7,7 +7,7 @@ defmodule GitAll.ConsoleSupervisor do
 
   defp spawn_workers(sub_dirs, root_dir, command, msg_joiner) do
     for dir <- sub_dirs do
-      spawn(GitAll.ConsoleWorker, :console_worker, [dir, root_dir, command, msg_joiner])
+      spawn(ParallelGitAll.ConsoleWorker, :console_worker, [dir, root_dir, command, msg_joiner])
       :timer.sleep(80)
     end
   end

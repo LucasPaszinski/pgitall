@@ -1,9 +1,9 @@
-defmodule GitAll.MixProject do
+defmodule ParallelGitAll.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :gitall,
+      app: :parallel_gitall,
       version: "0.1.1",
       escript: escript_config(),
       elixir: "~> 1.9",
@@ -21,7 +21,7 @@ defmodule GitAll.MixProject do
 
   defp escript_config do
     [
-      main_module: GitAll
+      main_module: ParallelGitAll
     ]
   end
 

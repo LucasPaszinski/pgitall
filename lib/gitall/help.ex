@@ -1,4 +1,4 @@
-defmodule GitAll.Help do
+defmodule ParallelGitAll.Help do
   def is_help(arg) do
     help_flags = ["--help", "-help", "--h", "-h"]
     Enum.member?(help_flags, arg)
