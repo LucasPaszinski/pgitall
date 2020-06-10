@@ -22,6 +22,8 @@ $ pgitall path(optional) command(optional)
 
   $ pgitall ..
 
-  $ pgitall \"git log\"")
+  $ pgitall \"git log\"
+
+  $ pgitall")
   end
 end
