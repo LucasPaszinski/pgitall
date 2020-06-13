@@ -1,5 +1,5 @@
 defmodule ParallelGitAll.ConsoleSupervisor do
-  def start_workers_wait_response([], _, _) do
+  def start_workers_wait_response([], _root_dir, _command) do
     ParallelGitAll.Help.show()
   end
 
