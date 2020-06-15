@@ -19,7 +19,7 @@ defmodule ParallelGitAll.ConsoleSupervisor do
   defp wait_workers_response(msgs_remaining) when msgs_remaining > 0 do
     receive do
       {:git, header, text} ->
-        IO.puts(msg_formatter(header, text))
+        ConsoleLogger.print(header, text)
     end
 
     wait_workers_response(msgs_remaining - 1)
@@ -27,18 +27,5 @@ defmodule ParallelGitAll.ConsoleSupervisor do
 
   defp wait_workers_response(0) do
     0
-  end
-
-  defp msg_formatter(header, text) do
-    # Do not fix the spacings and lines they are correct
-    String.replace(
-      " +-----------------------------------------------------------------------------------+
-\t#{String.upcase(header)}:
-+-----------------------------------------------------------------------------------+
-
-#{to_string(text)}",
-      ~r/\n/,
-      "\n\r "
-    )
   end
 end
