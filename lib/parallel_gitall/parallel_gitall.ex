@@ -7,7 +7,7 @@ defmodule ParallelGitAll do
   """
   def main(args) do
     {time, _result} = :timer.tc(ParallelGitAll, :start, parse_args(args))
-    IO.puts("Finished in #{time / 1_000_000} seconds !!!")
+    IO.puts("🏁🏁🏁 Finished in #{time / 1_000_000} seconds 🏁🏁🏁")
   end
 
   @doc """
