@@ -45,8 +45,6 @@ defmodule ParallelGitAll do
   start function
   """
   def start(path, command) do
-    IO.puts("-> path: #{path}\n-> command: #{command}")
-
     case @help.is_help(path) or @help.is_help(command) do
       true ->
         @help.show()
